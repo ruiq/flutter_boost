@@ -149,8 +149,7 @@ class BoostContainerState extends NavigatorState {
 
   @override
   Future<bool> maybePop<T extends Object>([T result]) async {
-    print("maybePop maybePop");
-    if (routerHistory.isEmpty) {
+    if (!this.canPop()) {
       FlutterBoost.singleton.closeCurrent();
       return true;
     }
