@@ -148,6 +148,11 @@ public class FlutterViewContainerManager implements IContainerManager {
                 break;
             }
         }
+        // 解决找不到targetRecord（明明还有一个targetRecord，但是uid匹配不上）
+        if (targetRecord == null && !mRecordMap.entrySet().isEmpty()) {
+            Map.Entry<IFlutterViewContainer, IContainerRecord> entry = (Map.Entry<IFlutterViewContainer, IContainerRecord>) mRecordMap.entrySet().toArray()[0];
+            targetRecord = (IContainerRecord) entry.getValue();
+        }
 
         if(targetRecord == null) {
             Debuger.exception("closeContainer can not find uniqueId:" + uniqueId);
